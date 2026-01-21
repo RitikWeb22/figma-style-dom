@@ -310,7 +310,10 @@ function updateProps() {
     }
 
     html += `
-        <div class="prop-group"><label>Opacity</label><input type="range" value="${el.opacity}  oninput="updateVal('opacity', this.value)"></div>
+    <div class="prop-group">
+            <label>Opacity (${el.opacity}%)</label>
+            <input type="range" min="0" max="100" value="${el.opacity}" oninput="updateValue('opacity', this.value)" onchange="saveState()">
+        </div>
         <button onclick="deleteEl()" style="background:#ef4444; color:white; width:100%; padding:8px; border-radius:4px; margin-top:10px;">Delete</button>
     `;
 
@@ -320,8 +323,8 @@ function updateProps() {
 function updateValue(key, val) {
     const el = elements.find(i => i.id === selectedId);
     if (!el) return;
-    el[key] = (key === 'bg' || key === 'textColor') ? val : Number(val);
-
+    el[key] = (key === 'bg' || key === 'textColor' || key === 'text') ? val : Number(val);
+    render();
     const div = document.getElementById(el.id);
     if (div) {
         if (key === 'w') div.style.width = val + 'px';
