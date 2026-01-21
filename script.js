@@ -310,7 +310,7 @@ function updateProps() {
     }
 
     html += `
-        <div class="prop-group"><label>Opacity</label><input type="range" value="${el.opacity}"></div>
+        <div class="prop-group"><label>Opacity</label><input type="range" value="${el.opacity}  oninput="updateVal('opacity', this.value)"></div>
         <button onclick="deleteEl()" style="background:#ef4444; color:white; width:100%; padding:8px; border-radius:4px; margin-top:10px;">Delete</button>
     `;
 
