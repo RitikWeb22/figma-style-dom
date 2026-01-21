@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Figma Editor Using Dom</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <header class="top-bar">
+        <div class="logo">
+          <img src="/images/logo.png" width="30px" alt="" />
+          <span>Figma</span>
+        </div>
+        <!-- tools -->
+        <div class="tools">
+          <button onclick="addShape('rect')" title="Rectangle">
+            <i class="ri-rectangle-line"></i>
+          </button>
+          <button onclick="addShape('circle')" title="Circle">
+            <i class="ri-circle-line"></i>
+          </button>
+          <button onclick="addShape('triangle')" title="Triangle">
+            <i class="ri-triangle-line"></i>
+          </button>
+          <button onclick="addShape('text')" title="Text">
+            <i class="ri-text"></i>
+          </button>
+          <button onclick="addImage()" title="Image">
+            <i class="ri-image-add-line"></i>
+          </button>
+        </div>
+        <div class="actions">
+          <button onclick="undo()" title="Undo (Ctrl+Z)">
+            <i class="ri-arrow-go-back-line"></i>
+          </button>
+          <button onclick="redo()" title="Redo (Ctrl+Y)">
+            <i class="ri-arrow-go-forward-line"></i>
+          </button>
+          <div class="divider"></div>
+          <button onclick="exportJSON()" class="btn-secondary">JSON</button>
+          <button onclick="exportHTML()" class="btn-primary">
+            Export HTML
+          </button>
+        </div>
+      </header>
+      <!-- layers section -->
+      <main class="editor-body">
+        <aside class="left-panel">
+          <div class="panel-header">Layers</div>
+          <div id="layers-list" class="list-container"></div>
+        </aside>
+        <!-- our canvas -->
+        <section class="canvas-area">
+          <div id="canvas" class="canvas-element"></div>
+          <div class="canvas-controls">
+            <button onclick="adjustZoom(-0.1)">
+              <i class="ri-subtract-line"></i>
+            </button>
+            <span id="zoom-level">100%</span>
+            <button onclick="adjustZoom(0.1)">
+              <i class="ri-add-line"></i>
+            </button>
+          </div>
+        </section>
+
+        <aside class="right-panel">
+          <div class="panel-header">Properties</div>
+          <div id="properties-panel" class="prop-container"></div>
+
+          <div class="alignment-section">
+            <div class="panel-header">Alignment</div>
+            <div class="alignment-grid">
+              <button onclick="alignElement('left')">
+                <i class="ri-align-left"></i>
+              </button>
+              <button onclick="alignElement('center')">
+                <i class="ri-align-center"></i>
+              </button>
+              <button onclick="alignElement('right')">
+                <i class="ri-align-right"></i>
+              </button>
+              <button onclick="alignElement('top')">
+                <i class="ri-align-top"></i>
+              </button>
+              <button onclick="alignElement('middle')">
+                <i class="ri-align-vertically"></i>
+              </button>
+              <button onclick="alignElement('bottom')">
+                <i class="ri-align-bottom"></i>
+              </button>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

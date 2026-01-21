@@ -1,0 +1,31 @@
+[
+  {
+    "id": "el_1768969906357",
+    "type": "rect",
+    "x": 147,
+    "y": 225,
+    "w": 150,
+    "h": 100,
+    "rotate": 0,
+    "bg": "#3b82f6",
+    "opacity": 100,
+    "visible": true,
+    "radius": 4
+  },
+  {
+    "id": "el_1768969908038",
+    "type": "text",
+    "x": 347,
+    "y": 274,
+    "w": 250,
+    "h": 80,
+    "rotate": 0,
+    "bg": "transparent",
+    "opacity": 100,
+    "visible": true,
+    "radius": 0,
+    "text": "Double Click to Edit",
+    "fontSize": 24,
+    "textColor": "#ffffff"
+  }
+]
