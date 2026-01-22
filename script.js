@@ -396,6 +396,57 @@ function duplicateElement() {
     render();
     saveState();
 }
+function exportJSON() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(elements, null, 2));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "my_design_backup.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+}
+
+function exportHTML() {
+    let htmlContent = `<div style="position: relative; width: ${CANVAS_WIDTH}px; height: ${CANVAS_HEIGHT}px; overflow: hidden; background: #1e1e1e;">`;
+
+    elements.forEach(el => {
+        if (!el.visible) return;
+        const borderRadius = el.type === 'circle' ? '50%' : el.radius + 'px';
+        const clipPath = el.type === 'triangle' ? 'polygon(50% 0%, 0% 100%, 100% 100%)' : 'none';
+        const bgStyle = el.type === 'image' ? `background-image: url('${el.url}'); background-size: cover;` : `background: ${el.bg};`;
+
+        htmlContent += `
+        <div style="
+            position: absolute;
+            left: ${el.x}px;
+            top: ${el.y}px;
+            width: ${el.w}px;
+            height: ${el.h}px;
+            ${bgStyle}
+            transform: rotate(${el.rotate}deg);
+            border-radius: ${borderRadius};
+            clip-path: ${clipPath};
+            opacity: ${el.opacity / 100};
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: ${el.textColor || '#fff'};
+            font-size: ${el.fontSize || 16}px;
+            font-family: sans-serif;
+        ">${el.text || ''}</div>`;
+    });
+
+    htmlContent += `</div>`;
+
+    // File download logic
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'portfolio_section.html';
+    a.click();
+    URL.revokeObjectURL(url);
+}
 
 const saved = localStorage.getItem('figma_save');
 if (saved) {
@@ -403,4 +454,6 @@ if (saved) {
     history = [saved];
     historyIndex = 0;
 }
+
+
 render();
